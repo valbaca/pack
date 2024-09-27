@@ -38,3 +38,15 @@ Make sure to deploy the output of `npm run build`
 ## Styling
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+
+## CDK
+
+TK
+
+## Reveal app/entry files
+
+Deleted app/entry.client.tsx and app/entry.server.tsx after git commit `d8ea5e04e410fb1f6fae4564988f46e8a6522f28`
+
+Get them back with `npx remix reveal`
+
+For more information, see https://remix.run/file-conventions/entry.server
