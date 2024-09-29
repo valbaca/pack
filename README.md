@@ -24,7 +24,9 @@ Then run the app in production mode:
 npm start
 ```
 
-Now you'll need to pick a host to deploy it to.
+~~Now you'll need to pick a host to deploy it to.~~
+
+See [](#cdk) for how deployment works using AWS CDK
 
 ### DIY
 
@@ -41,7 +43,42 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 
 ## CDK
 
-TK
+```sh
+npm run build # build for production
+cd aws
+npm i
+npm run cdk deploy # deploy to production
+```
+
+### CDK Architecture
+
+When Remix builds `npm run build` with Vite it outputs the following:
+
+- Remix backend server is put in `build/server`, includes backend js.
+- Remix frontend assets is put in `build/client`, includes png, css, and frontend js.
+
+**Backend**:
+
+`server.ts` takes the Remix server and wraps it so we can call it from AWS Lambda. 
+See [](aws/lib/remix-server.ts). It's only 5 lines of code.
+
+**Frontend**:
+The frontend assets, from `public/` and `build/client` are uploaded to an S3 bucket.
+See "RemixLambdaFn" [](aws/lib/remix-distribution.ts)
+
+**Backend server** uses AWS Lambda running the `server.ts` file as the handler.
+`server.ts` takes the default server provided by Remix and wraps it so that AWS Lambda can call it.
+
+The client png/css/js files are uploaded to an S3 bucket. See the "RemixBucketDeployment" in [](aws/lib/remix-stack.ts)
+
+**Cloudfront**: Finally, they both *fronted* by Cloudformation.
+
+- calls to `<server>/*.png` or `<server>/assets/*` get forwarded to the S3 bucket and are edge-cached
+- all other calls go to the AWS Lambda backend
+
+See "RemixCloudfrontDistribution" in [](aws/lib/remix-distribution.ts)
+
+See ./aws/README.md for more info
 
 ## Reveal app/entry files
 
