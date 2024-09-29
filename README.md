@@ -80,6 +80,17 @@ See "RemixCloudfrontDistribution" in [](aws/lib/remix-distribution.ts)
 
 See ./aws/README.md for more info
 
+### CDK Resources
+
+These were helpful in getting the CDK architecture setup:
+
+- [Hosting a Remix Application on AWS with CDK](https://www.benoitpaul.com/blog/aws/remix-hosting-serverless/)
+  - [benoitpaul/remix-hosting-serverless-aws](https://github.com/benoitpaul/remix-hosting-serverless-aws)
+  - This was a great start but wasn't using Vite
+- [devkit-io/create-vite-app-cdk](https://github.com/devkit-io/create-vite-app-cdk)
+  - This is probably better, but seemed to have additional complexity.
+- [m14t/starter-aws-cdk](https://github.com/m14t/starter-aws-cdk)
+
 ## Reveal app/entry files
 
 Deleted app/entry.client.tsx and app/entry.server.tsx after git commit `d8ea5e04e410fb1f6fae4564988f46e8a6522f28`
